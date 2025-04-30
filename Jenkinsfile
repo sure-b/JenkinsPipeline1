@@ -5,7 +5,10 @@
             stage('Build Image') {
                 steps {
                     script {
+                        
+                        dir('my-ract-app'){
                         dockerImage = docker.build("sure89/my-react-app:${env.BUILD_NUMBER}")
+                        }
                     }
                 }
             }
