@@ -6,7 +6,7 @@
                 steps {
                     script {
                         
-                        dir('my-ract-app'){
+                        dir('my-react-app'){
                         dockerImage = docker.build("sure89/my-react-app:${env.BUILD_NUMBER}")
                         }
                     }
