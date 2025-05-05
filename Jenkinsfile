@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_IMAGE_NAME = 'sure89/myDemo-react-app'  // Docker image name
+        DOCKER_IMAGE_NAME = 'sure89/mydemo-react-app'  // Docker image name
         DOCKER_HUB_CREDENTIALS = 'DockerHub-Cred'  // Jenkins credentials for Docker Hub
         DEPLOY_SERVER = 'localhost'                 // Docker Desktop is running on the same machine as Jenkins
         DEPLOY_USER = 'your_ssh_user'              // SSH user for remote deployment (if necessary)
