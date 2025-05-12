@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_IMAGE_NAME = 'sure89/mydemo-react-app'  // Docker image name
+        DOCKER_IMAGE_NAME = 'sure89/new-react-app'  // Docker image name
         DOCKER_HUB_CREDENTIALS = 'DockerHub-Cred'  // Jenkins credentials for Docker Hub
         DEPLOY_SERVER = 'localhost'                 // Docker Desktop is running on the same machine as Jenkins
         DEPLOY_USER = 'your_ssh_user'              // SSH user for remote deployment (if necessary)
@@ -13,7 +13,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build Docker image from the 'my-react-app' directory
+                    // Build Docker image from the 'New-react-app' directory
                     dir('my-react-app') {
                         dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
                     }
@@ -47,7 +47,7 @@ pipeline {
                         sh "docker pull ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
 
                         // Run the container (expose port 80)
-                        sh "docker run -d -p 80:80 --name mydemo-react-app ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
+                        sh "docker run -d -p 80:80 --name new-react-app ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
                     } else {
                         // Use SSH to deploy to a remote Docker Desktop machine (if necessary)
                         sshagent(credentials: [DEPLOY_KEY]) {
@@ -55,7 +55,7 @@ pipeline {
                                 echo "Deploying to ${DEPLOY_SERVER}..."
                                 ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_SERVER} '
                                     docker pull ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} &&
-                                    docker run -d -p 80:80 --name react-app ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}
+                                    docker run -d -p 80:80 --name new-react-app ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}
                                 '
                             """
                         }
