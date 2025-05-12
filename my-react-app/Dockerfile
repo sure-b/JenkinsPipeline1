@@ -7,11 +7,11 @@
     RUN npm run build
     
     # Stage 2: Serve the app with Nginx
-    FROM nginx:alpine
+    FROM nginx:latest
     # Update & install sudo and other tools
-    RUN apt-get update && \
-    apt-get install -y sudo passwd && \
-    rm -rf /var/lib/apt/lists/*
+    # RUN apt-get update && \
+    # apt-get install -y sudo passwd && \
+    # rm -rf /var/lib/apt/lists/*
 
     # Create a new user with password and sudo privileges
     RUN useradd -ms /bin/bash vivritiadmin && \
