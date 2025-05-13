@@ -47,7 +47,7 @@ pipeline {
                         sh "docker pull ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
 
                         // Run the container (expose port 80)
-                        sh "docker run -d -p 80:80 --name new-react-app ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
+                        sh "docker run -d -p 8080:8080 --name new-react-app ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
                     } else {
                         // Use SSH to deploy to a remote Docker Desktop machine (if necessary)
                         sshagent(credentials: [DEPLOY_KEY]) {
@@ -55,7 +55,7 @@ pipeline {
                                 echo "Deploying to ${DEPLOY_SERVER}..."
                                 ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_SERVER} '
                                     docker pull ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER} &&
-                                    docker run -d -p 80:80 --name new-react-app ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}
+                                    docker run -d -p 8080:8080 --name new-react-app ${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}
                                 '
                             """
                         }
